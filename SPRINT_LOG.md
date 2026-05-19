@@ -83,3 +83,7 @@ The feature requires 32603 credits, but the Ryan Coleman's Team team only has 0 
 ## Turn 13 — Manager (2026-05-19 07:02 UTC)
 
 The feature requires 32603 credits, but the Ryan Coleman's Team team only has 0 credits
+
+## Turn 14 — Manager (2026-05-19 07:03 UTC)
+
+The feature requires 32603 credits, but the Ryan Coleman's Team team only has 0 credits
