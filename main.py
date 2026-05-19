@@ -1,28 +1,32 @@
-import argparse
-import os
-import sys
-from monitor import fetch_org_data
-from report import render_report
 
-def main():
-    parser = argparse.ArgumentParser(description="Org-Wide PR Aging & Review Velocity CLI")
-    parser.add_argument("--org", required=True, help="GitHub organization name")
-    parser.add_argument("--min-days-stale", type=int, default=14, help="Minimum days to consider PR stale")
-    parser.add_argument("--output-format", choices=["table", "csv"], default="table", help="Output format")
-    args = parser.parse_args()
+import requests
 
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        print("Error: GITHUB_TOKEN environment variable is not set.")
-        sys.exit(1)
+def fetch_repositories(org, token):
+    url = f'https://api.github.com/orgs/{org}/repos'
+    headers = {'Authorization': f'token {token}'}
+    repos = []
+    while url:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        repos.extend(response.json())
+        url = response.links.get('next', {}).get('url')
+    return repos
 
-    try:
-        pr_data = fetch_org_data(args.org, token, args.min_days_stale)
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        sys.exit(1)
+def fetch_pull_requests(repo, token):
+    url = f'https://api.github.com/repos/{repo}/pulls'
+    headers = {'Authorization': f'token {token}'}
+    prs = []
+    while url:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        prs.extend(response.json())
+        url = response.links.get('next', {}).get('url')
+    return prs
 
-    render_report(pr_data, args.output_format)
-
-if __name__ == "__main__":
-    main()
+def fetch_all_org_prs(org, token):
+    repositories = fetch_repositories(org, token)
+    all_prs = {}
+    for repo in repositories:
+        repo_full_name = repo['full_name']
+        all_prs[repo_full_name] = fetch_pull_requests(repo_full_name, token)
+    return all_prs
