@@ -1,0 +1,13 @@
+{
+  "goal": "Build a Python CLI tool to track PR age, review activity, and tech debt across a GitHub organization.",
+  "acceptance_criteria": [
+    "Fetch all repos and PRs for a specified GitHub org using requests and the GitHub REST API v3. Handle pagination and respect rate limit headers.",
+    "Filter PRs stale > 14 days. Calculate review density = (PR comments + Issue comments) / days_open.",
+    "Generate a formatted terminal report using rich with color-coded rows.",
+    "Handle edge cases: empty org, rate limits, missing fields, invalid tokens.",
+    "All tests must pass using unittest + responses mock library."
+  ],
+  "meeting_budget": 5,
+  "meetings_held": 2,
+  "status": "active"
+}
