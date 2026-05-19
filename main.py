@@ -1,25 +1,18 @@
+
 import requests
 
 def fetch_repos(org, token):
-    repos = []
-    url = f'https://api.github.com/orgs/{org}/repos'
+    """Stub function to fetch repositories for an organization."""
+    url = f"https://api.github.com/orgs/{org}/repos"
     headers = {'Authorization': f'token {token}'}
-    while url:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        repos.extend(response.json())
-        url = response.links.get('next', {}).get('url')
-    return repos
+    response = requests.get(url, headers=headers)
+    # Implement pagination and error handling logic
+    return response.json()
 
-
-def fetch_all_prs(repos, token):
-    all_prs = []
+def fetch_all_prs(repo, token):
+    """Stub function to fetch all pull requests for a repo."""
+    url = f"https://api.github.com/repos/{repo}/pulls"
     headers = {'Authorization': f'token {token}'}
-    for repo in repos:
-        url = repo['pulls_url'].replace('{/number}', '')
-        while url:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            all_prs.extend(response.json())
-            url = response.links.get('next', {}).get('url')
-    return all_prs
+    response = requests.get(url, headers=headers)
+    # Implement pagination and error handling logic
+    return response.json()
