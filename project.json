@@ -8,6 +8,6 @@
     "All tests must pass using unittest + responses mock library."
   ],
   "meeting_budget": 5,
-  "meetings_held": 2,
+  "meetings_held": 4,
   "status": "active"
 }

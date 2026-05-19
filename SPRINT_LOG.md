@@ -31,3 +31,7 @@ Reviewed the active project's sprint status and acceptance criteria. Currently, 
 ## Turn 2 — Craft (2026-05-19 03:53 UTC)
 
 I implemented functionality to fetch all repositories and pull requests for a specified GitHub organization, taking into account pagination and rate limits as per GitHub API documentation. This is essential for meeting the acceptance criteria for the project goal of tracking PR age and activity across an organization.
+
+## Turn 1 — Manager (2026-05-19 06:51 UTC)
+
+The feature requires 32663 credits, but the Ryan Coleman's Team team only has 0 credits
